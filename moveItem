@@ -1,0 +1,49 @@
+Поиск Богатой руды и перемещение на разборку
+{{#items @root.E.S "res"}}
+{{#test Id in "11455,11456,11457,11446,11454,11459"}}
+{{#move this @root.E.S "remove"}}
+{{/move}}
+{{/test}}
+{{/items}}
+Поиск необходимых ID и перемещение в дорогие ресы
+{{#items @root.E.S "remove"}}
+{{#test Id in "405,411,8424,2263,2992,2994,2997,3529,835"}}
+{{#move this @root.E.S "great"}}
+{{/move}}
+{{/test}}
+{{/items}}
+Перемещение охладителя в ресурсы
+{{#items @root.E.S "resnotActive"}}
+{{#test Id in "9204"}}
+{{#move this @root.E.S "res"}}
+{{/move}}
+{{/test}}
+{{/items}}
+Перемещение схематики в Test
+{{#items @root.E.S "*e*"}}
+{{#test Id in "640009497"}}
+{{#move this @root.E.S "Test"}}
+{{/move}}
+{{/test}}
+{{/items}}
+{{#items E.S 'resNotActive'}}
+{{#test Count ge 49999}}
+Перемещаем {{Name}} в resNotActive2
+{{#move this @root.E.S "resNotActive2"}}
+{{/move}}
+{{/test}}
+{{/items}}
+{{#items E.S 'resNotActive2'}}
+{{#test Count le 50000}}
+Перемещаем {{Name}} в resNotActive
+{{#move this @root.E.S "resNotActive"}}
+{{/move}}
+{{/test}}
+{{/items}}
+Вывод ID из контейнера Test на экран
+{{#items E.S 'Test'}}
+{{#test Count ge 0}}
+ID:
+{{!-- Name --}} {{Id}} {{!-- i18n Key 'Russian' --}}
+{{/test}}
+{{/items}}
