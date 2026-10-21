@@ -1,0 +1,5 @@
+{{set 'delete' 'res_1'}}
+{{!--Вместо res_1 ввести название сундука --}}
+Вещи удалаются из: {{@root.Data.delete}}
+{{trashcontainer E.S  @root.Data.delete}}
+
