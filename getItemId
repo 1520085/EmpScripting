@@ -1,0 +1,5 @@
+{{#items E.S 'Test'}}
+{{#test Count ge 0}}
+{{!-- Name --}} {{Id}} {{!-- i18n Key 'Russian' --}}
+{{/test}}
+{{/items}}
