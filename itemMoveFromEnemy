@@ -1,0 +1,26 @@
+{{set 'Total' 0~}}
+{{#items E.S 'res_1'}}
+{{~set 'Total' (calc @root.Data.Total '+' Count)~}}
+{{/items}}
+Общее: {{@root.Data.Total}}
+{{set 'SrcName' 'Dec'}}
+{{set 'MaxDist' 500}}
+=== Pull -> res_1 ===
+{{#entitiesbyname @root.Data.SrcName @root.Data.MaxDist}}
+{{#each .}}
+{{#test @root.E.Id neq Id}}
+{{Name}} #{{Id}} {{distance Pos @root.E.Pos '0'}}m
+{{scroll 10 1}}
+{{#items S '**'}}
+{{#move this @root.E.S 'res_1'}}
+{{format Count '{0,5}'}} {{i18n Id}}
+{{SourceE.Name}}:{{Source}} -> {{Destination}}
+{{else}}{{/move}}
+{{/items}}
+{{/scroll}}
+{{/test}}
+{{/each}}
+{{else}}
+Корабль Dec не найден!
+{{/entitiesbyname}}
+
