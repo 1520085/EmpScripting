@@ -1,0 +1,57 @@
+{{datetime 'HH:MM:ss'}}
+{{set 'shield1per' (calc значение '/' 100)}}
+{{set 'shieldp' (calc @root.E.S.ShieldLevel '/' @root.Data.shield1per)}}
+Щит:
+{{#if @root.E.S.IsShieldActive}}
+{{color = '00ff00'}}
+{{@root.E.S.ShieldLevel}} points
+{{int @root.Data.shieldp}} %
+{{~else~}}
+{{color = 'ff0000'}}
+Щит отключён
+{{/if}}
+{{#intervall 3}}
+{{setcache 'shieldDiffOld' @root.E.S.ShieldLevel}}
+{{else}}
+
+{{/intervall}}
+{{set 'shieldDiffTotal' (calc @root.CacheData.shieldDiffOld '-' @root.E.S.ShieldLevel)}}
+Урон: {{@root.Data.shieldDiffTotal}}
+{{intervall 30}}
+	{{~#devices @root.E.S 'Tt*'}}
+			{{~#each this}}
+			{{~setactive this false}}
+			{{~/each}}
+			{{~/devices}}
+{{else}}{{/intervall}}
+{{#test @root.Data.shieldDiffTotal ge 1}}
+Тревога 1 уровня!
+		{{~#devices @root.E.S 'Tt1'}}
+		{{~#each this}}
+		{{~setactive this true}}
+		{{~/each}}
+		{{~/devices}}
+{{/test}}
+
+{{#test @root.Data.shieldDiffTotal ge 10000}}
+	{{#test @root.Data.shieldDiffTotal le 50000}}
+Тревога 2 уровня!
+		{{~#devices @root.E.S 'Tt2'}}
+		{{~#each this}}
+		{{~setactive this true}}
+		{{~/each}}
+		{{~/devices}}
+	{{/test}}
+{{/test}}
+
+
+{{#test @root.Data.shieldDiffTotal ge 50000}}
+	{{#test @root.Data.shieldDiffTotal le 200000}}
+Тревога 3 уровня!
+			{{~#devices @root.E.S 'Tt3'}}
+			{{~#each this}}
+			{{~setactive this true}}
+			{{~/each}}
+			{{~/devices}}
+	{{/test}}
+{{/test}}
