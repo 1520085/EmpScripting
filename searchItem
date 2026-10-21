@@ -1,0 +1,21 @@
+{{color '00ffff'}}
+<line-height=-17px>
+</line-height><align=right>
+<size=100%><b>
+Скрипт Поиска предметов
+Блоки</b><br></size></align>
+{{#items E.S 'Test'}}
+{{#test Count ge 0}}
+Ищем и перемещаем: {{Name}} {{Id}}
+{{set 'ok' Id}}
+{{/test}}
+{{else}}
+Готово!
+{{/items}}
+
+{{#items @root.E.S "**"}}
+{{#test Id in @root.data.ok}}
+{{#move this @root.E.S "Общак"}}
+{{/move}}
+{{/test}}
+{{/items}}
