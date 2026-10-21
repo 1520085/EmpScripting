@@ -1,0 +1,39 @@
+Light:
+{{!- Включение лампы красного света с морганием и типом освещения Area -}}
+{{~lights E.S 'ShieldLight'}}
+{{lighttype this 'Area'}}
+{{~lightcolor this 'ff0000'}}
+  {{~steps 1 6}}
+     {{~this}}
+{{lightintensity ../this this}}
+  {{/steps}}
+{{/lights}}
+{{~lights E.S 'ShieldLight1'}}
+{{lighttype this 'Area'}}
+{{~lightcolor this 'ff0000'}}
+  {{~steps 1 9}}
+     {{~this}}
+{{lightintensity ../this this}}
+  {{/steps}}
+{{/lights}}
+
+
+Пример света:
+
+lighttype:
+
+'Area' - мягкий
+'Point' - лампа
+'Spot' - прожектор
+{{lightspotangle this 36}} - угол освещения типа SPOT
+
+Light:
+{{~lights E.S 'Light'}}
+{{lighttype this 'Area'}}
+{{~lightcolor this 'ff0000'}}
+  {{~steps 1 9}}
+     {{~this}}
+{{lightintensity ../this this}}
+  {{/steps}}
+{{/lights}}
+
