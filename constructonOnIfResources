@@ -1,0 +1,65 @@
+{{!--Объявляет переменные с ID--}}
+{{!--ID ЖК экраны--}}
+{{set 'has1095' false}}
+{{set 'volume1095' 0}}
+{{!--ID Камень--}}
+{{set 'has8424' false}}
+{{set 'volume8424' 0}}
+{{!--Показывает ID всех предметов в контейнере--}}
+{{#items E.S 'remove'}}
+{{Id}} - {{i18n Key 'Russian'}}
+{{/items}}
+{{!--Блок с id 1095--}}
+{{#items E.S 'remove'}}
+   {{#test Id eq 1095}}
+      {{set 'has1095' true}}
+      {{set 'volume1095' count}}
+   {{/test}}
+   {{#test Id eq 8424}}
+      {{set 'has8424' true}}
+      {{set 'volume8424' count}}
+   {{/test}}
+{{/items}}
+{{#test @root.Data.has1095 eq true}}
+   Экраны с id 1095 обнаружены
+   {{#test @root.Data.volume1095 le 10}}
+      Количество <=10
+   {{else}}
+      Кол-во >10, {{@root.Data.volume1095}} штук
+   {{/test}}
+{{else}}
+   1095 не обнаружен
+{{/test}}
+{{!--Конец блока 1095--}}
+{{!--Блок с id 8424--}}
+{{#test @root.Data.has8424 eq true}}
+   Камни с id 8424 обнаружены
+   {{#test @root.Data.volume8424 le 10}}
+      Количество <=10
+   {{else}}
+      Кол-во >10, {{@root.Data.volume8424}} штук
+   {{/test}}
+{{else}}
+   8424 не обнаружен
+{{/test}}
+{{!--Конец блока 8424--}}
+
+   {{#test @root.Data.volume1095 ge 10}}
+      {{#test @root.Data.volume8424 ge 10}}
+		Всё есть! Запускаю конструктор!
+		{{~#devices @root.E.S 'Кухня_10'}}
+		{{~#each this}}
+		{{~setactive this true}}
+		{{~/each}}
+		{{~/devices}}
+	  {{/test}}
+   {{else}}
+      Ингридиентов не хватает! Конструктор отключён!
+		{{~#devices @root.E.S 'Кухня_10'}}
+		{{~#each this}}
+		{{~setactive this true}}
+		{{~/each}}
+		{{~/devices}}
+   {{/test}}
+
+
