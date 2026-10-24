@@ -1,35 +1,35 @@
-{{#items E.S 'remove'}}
-   {{#test Id eq 1095}}
+{{set 'gold' false}}
+{{set 'goldPoint' 0}}
+{{#items E.S 'res'}}
+   {{#test Id eq 8442}}
       {{set 'gold' true}}
       {{set 'goldPoint' count}}
    {{/test}}
 {{/items}}
-
 {{#test @root.Data.gold eq true}}
-   Золота достаточно.
+Золота достаточно.
    {{#test @root.Data.goldPoint le 3000}}
-      Количество золота <=3000
-	{{~#devices @root.E.S 'Кухня_10'}}
+Количество золота <=3000
+{{bgcolor 'ffff00'}}
+	{{~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
 		{{~setactive this false}}
 		{{~/each}}
 		{{~/devices}}
    {{else}}
-      Кол-во >3000, {{@root.Data.goldPoint}} штук
-	  {{~#devices @root.E.S 'Кухня_10'}}
+Кол-во >3000, {{@root.Data.goldPoint}} штук
+	  {{~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
 		{{~setactive this true}}
 		{{~/each}}
-		{{~/devices
-	{{/else}}
+		{{~/devices}}
    {{/test}}
 {{else}}
-   Золота нет.
-   Ингридиентов не хватает! Конструктор отключён!
-   {{~#devices @root.E.S 'Кухня_10'}}
+Золота нет.
+Ингридиентов не хватает! Конструктор отключён!
+   {{~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
 		{{~setactive this false}}
 		{{~/each}}
 		{{~/devices}}
-{{/else}}
 {{/test}}
