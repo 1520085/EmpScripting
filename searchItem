@@ -15,7 +15,7 @@
 
 {{#items @root.E.S "**"}}
 {{#test Id in @root.data.ok}}
-{{#move this @root.E.S "Общак"}}
+{{#move this @root.E.S "Найдено"}}
 {{/move}}
 {{/test}}
 {{/items}}
