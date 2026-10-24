@@ -17,7 +17,7 @@
 		{{~/each}}
 		{{~/devices}}
    {{~else~}}
-Кол-во >3000, {{@root.Data.goldPoint}} штук
+Золота: {{@root.Data.goldPoint}} штук
 {{~color '00ff00'}}
 	  {{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
@@ -37,6 +37,7 @@
 {{/test}}
 {{~set 'tokensvolume' 0}}
 {{~set 'tokens' false}}
+{{~set 'moneygold' 0}}
 {{~#items E.S 'Done'}}
 {{test Id eq 8443}}
 {{~set 'tokens' true}}
@@ -44,4 +45,6 @@
 {{~/test}}
 {{~/items}}
 {{~set 'money' (calc @root.Data.tokensvolume '*' 0,00005)}}
-Запас денег: {{@root.Data.money}} мульта
+{{~set 'moneygold' (calc @root.Data.goldPoint '*' 0,00005)}}
+{{~set 'moneyend' (calc @root.Data.money '+' @root.Data.moneygold)}}
+Запас денег: {{@root.Data.money}} / {{@root.Data.moneygold}} миллиона
