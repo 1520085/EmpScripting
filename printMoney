@@ -1,6 +1,6 @@
 {{~set 'gold' false}}
 {{~set 'goldPoint' 0}}
-{{color 'ffffff'}}
+{{color '000000'}}
 {{~#items E.S 'res'}}
    {{~#test Id eq 8442}}
       {{~set 'gold' true}}
