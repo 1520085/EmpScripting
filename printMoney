@@ -1,6 +1,6 @@
 {{~set 'gold' false}}
 {{~set 'goldPoint' 0}}
-{{~color = '000000'}}
+{{!-- ~color = '000000' --}}
 {{~#items E.S 'res'}}
    {{~#test Id eq 8442}}
       {{~set 'gold' true}}
@@ -8,10 +8,9 @@
    {{~/test}}
 {{~/items}}
 {{~#test @root.Data.gold eq true}}
-Золота достаточно.
    {{#test @root.Data.goldPoint le 3000}}
 Количество золота <=3000
-{{~bgcolor 'ffff00'}}
+{{~color 'ffff00'}}
 	{{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
 		{{~setactive this false}}
@@ -19,8 +18,7 @@
 		{{~/devices}}
    {{~else~}}
 Кол-во >3000, {{@root.Data.goldPoint}} штук
-Печатаем!
-{{~bgcolor '00ff00'}}
+{{~color '00ff00'}}
 	  {{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
 		{{~setactive this true}}
@@ -29,7 +27,7 @@
    {{~/test~}}
 {{~else~}}
 Золота нет.
-{{~bgcolor 'ff0000'}}
+{{~color 'ff0000'}}
 Ингридиентов не хватает! Конструктор отключён!
    {{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
@@ -37,3 +35,13 @@
 		{{~/each}}
 		{{~/devices}}
 {{/test}}
+{{~set 'tokensvolume' 0}}
+{{~set 'tokens' false}}
+{{~#items E.S 'Done'}}
+{{test Id eq 8443}}
+{{~set 'tokens' true}}
+{{~set 'tokensvolume' count}}
+{{~/test}}
+{{~/items}}
+{{~set 'money' (calc @root.Data.tokensvolume '*' 0,00005)}}
+Запас денег: {{@root.Data.money}} мульта
