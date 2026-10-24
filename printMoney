@@ -1,31 +1,34 @@
-{{set 'gold' false}}
-{{set 'goldPoint' 0}}
-{{#items E.S 'res'}}
-   {{#test Id eq 8442}}
-      {{set 'gold' true}}
-      {{set 'goldPoint' count}}
-   {{/test}}
-{{/items}}
-{{#test @root.Data.gold eq true}}
+{{~set 'gold' false}}
+{{~set 'goldPoint' 0}}
+{{color 'ffffff'}}
+{{~#items E.S 'res'}}
+   {{~#test Id eq 8442}}
+      {{~set 'gold' true}}
+      {{~set 'goldPoint' count}}
+   {{~/test}}
+{{~/items}}
+{{~#test @root.Data.gold eq true}}
 Золота достаточно.
    {{#test @root.Data.goldPoint le 3000}}
 Количество золота <=3000
-{{bgcolor 'ffff00'}}
-	{{~#devices @root.E.S 'Gold'}}
+{{~bgcolor 'ffff00'}}
+	{{~~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
 		{{~setactive this false}}
 		{{~/each}}
 		{{~/devices}}
-   {{else}}
+   {{~else~}}
 Кол-во >3000, {{@root.Data.goldPoint}} штук
+{{~bgcolor '00ff00'}}
 	  {{~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
 		{{~setactive this true}}
 		{{~/each}}
 		{{~/devices}}
-   {{/test}}
-{{else}}
+   {{~/test~}}
+{{~else~}}
 Золота нет.
+{{~bgcolor 'ff0000'}}
 Ингридиентов не хватает! Конструктор отключён!
    {{~#devices @root.E.S 'Gold'}}
 		{{~#each this}}
