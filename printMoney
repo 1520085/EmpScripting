@@ -1,6 +1,6 @@
 {{~set 'gold' false}}
 {{~set 'goldPoint' 0}}
-{{color '000000'}}
+{{~color = '000000'}}
 {{~#items E.S 'res'}}
    {{~#test Id eq 8442}}
       {{~set 'gold' true}}
@@ -12,15 +12,16 @@
    {{#test @root.Data.goldPoint le 3000}}
 Количество золота <=3000
 {{~bgcolor 'ffff00'}}
-	{{~~#devices @root.E.S 'Gold'}}
+	{{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
 		{{~setactive this false}}
 		{{~/each}}
 		{{~/devices}}
    {{~else~}}
 Кол-во >3000, {{@root.Data.goldPoint}} штук
+Печатаем!
 {{~bgcolor '00ff00'}}
-	  {{~#devices @root.E.S 'Gold'}}
+	  {{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
 		{{~setactive this true}}
 		{{~/each}}
@@ -30,7 +31,7 @@
 Золота нет.
 {{~bgcolor 'ff0000'}}
 Ингридиентов не хватает! Конструктор отключён!
-   {{~#devices @root.E.S 'Gold'}}
+   {{~#devices @root.E.S 'GoldPrinter'}}
 		{{~#each this}}
 		{{~setactive this false}}
 		{{~/each}}
